@@ -92,8 +92,15 @@ public class Sample : MonoBehaviour
 
     private void OnValidate()
     {
-        buttonSync.gameObject.SetActive(supportLocalDatabase);
-        textSync.gameObject.SetActive(supportLocalDatabase);
+        if (buttonSync != null)
+        {
+            buttonSync.gameObject.SetActive(supportLocalDatabase);
+        }
+
+        if (textSync != null)
+        {
+            textSync.gameObject.SetActive(supportLocalDatabase);
+        }
     }
 
     public async void Get_Click()
@@ -161,13 +168,8 @@ public class Sample : MonoBehaviour
             contents.AppendLine();
         }
 
-        TodoItem i = list[0];
-        i.Text += "Updated";
-
-        await todoTableDAO.Update(i);
-
         output.text = contents.ToString();
-    }
+   }
 
     private async Task Insert()
     {
